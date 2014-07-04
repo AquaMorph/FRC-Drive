@@ -92,8 +92,8 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-					Log.d("Joystick 1", "X: " + ui.joy1X);
-					Log.d("Joystick 1", "Y: " + ui.joy1Y);
+//					Log.d("Joystick 1", "X: " + ui.joy1X);
+//					Log.d("Joystick 1", "Y: " + ui.joy1Y);
 					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, CRIOPacket.JOY1);
 					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, CRIOPacket.JOY2);
 					rioPacket.setAuto(ui.auto);

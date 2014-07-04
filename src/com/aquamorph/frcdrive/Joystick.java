@@ -73,7 +73,7 @@ public class Joystick extends View implements OnTouchListener{
 		actualY = event.getY();
 		virtualX = actualX - outerRadius;
 		virtualY = outerRadius-actualY;
-		int radius = outerRadius-innerRadius;
+		double radius = outerRadius-innerRadius;
 		
 		switch(event.getAction()){
 		case MotionEvent.ACTION_DOWN:	//Fall through ACTION_MOVE case
@@ -99,8 +99,6 @@ public class Joystick extends View implements OnTouchListener{
 				}
 				actualX = virtualX + outerRadius;
 				actualY = outerRadius-virtualY ;
-				Log.d("Joystick 3", "X: " + actualX);
-				Log.d("Joystick 3", "Y: " + actualY);
 			}
 			break;
 			
@@ -113,6 +111,10 @@ public class Joystick extends View implements OnTouchListener{
 		
 		}
 		invalidate();
+		//Convert joystick range
+		virtualX=(float) ((128/radius)*virtualX);
+		virtualY=(float) ((128/radius)*virtualY);
+		//Convert to byte for packets
 		xAxis = (byte) (virtualX);
 		yAxis = (byte) (virtualY);
 		onChange.onChange(xAxis, yAxis);
