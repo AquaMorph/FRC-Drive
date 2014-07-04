@@ -111,8 +111,13 @@ public class Joystick extends View implements OnTouchListener{
 		}
 		invalidate();
 		//Convert joystick range
+<<<<<<< HEAD
 		virtualX=(float) ((128/radius)*virtualX);
 		virtualY=(float) ((128/radius)*virtualY);
+=======
+		virtualX=(float) ((1.28)*virtualX);
+		virtualY=(float) ((1.28)*virtualY);
+>>>>>>> c119f0cddded1a4c8fe0acf09b239f9f03ecc434
 		//Convert to byte for packets
 		xAxis = (byte) (virtualX);
 		yAxis = (byte) (virtualY);
