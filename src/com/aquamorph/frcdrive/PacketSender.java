@@ -10,7 +10,6 @@ import java.net.UnknownHostException;
 import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.WifiManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.aquamorph.frcdrive.CRIOPacket;
@@ -92,8 +91,6 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-//					Log.d("Joystick 1", "X: " + ui.joy1X);
-//					Log.d("Joystick 1", "Y: " + ui.joy1Y);
 					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, CRIOPacket.JOY1);
 					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, CRIOPacket.JOY2);
 					rioPacket.setAuto(ui.auto);
@@ -103,7 +100,6 @@ public class PacketSender extends Thread{
 					sock.send(packet);
 					rioPacket.clearCRC();  
 					packetIndex++;
-//					Log.d("Packets", "sent");
 					Thread.sleep(20);
 				}
 				postMessage("Robot not connected");
