@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <intent
+        android:action="android.intent.action.VIEW"
+        android:targetClass="com.aquamorph.PreferenceActivity2"
+        android:targetPackage="com.aquamorph.frcmanual" />
+
+    <PreferenceCategory
+        android:summary="General"
+        android:title="General" >
+        <EditTextPreference
+            android:inputType="number"
+            android:key="teamNumber"
+            android:summary="Enter 4 digit number for setting the ip"
+            android:title="Team Number" />
+        <EditTextPreference
+            android:inputType="number"
+            android:key="IPNumber"
+            android:summary="Enter the last IP digit (defualt if 5)"
+            android:defaultValue="5"
+            android:title="IP Number" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:summary="About"
+        android:title="About" >
+        <PreferenceScreen
+            android:key="preferencescreen_about"
+            android:summary="So Long, and Thanks for All the Fish"
+            android:title="Version 1.0.0" />
+        <PreferenceScreen
+            android:key="preferencescreen_about"
+            android:summary="FRC Team 2059 The Hitchhikers"
+            android:title="Created by Christian Colglazier" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

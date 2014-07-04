@@ -1,0 +1,12 @@
+local.properties
+bin/
+gen/
+libs/
+obj/
+.classpath
+.project
+.settings/
+.idea
+proguard-project.txt
+ic_launcher-web.png
+project.properties
