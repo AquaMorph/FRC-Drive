@@ -18,7 +18,6 @@ public class Joy1Adapter extends BaseAdapter {
 	    public Joy1Adapter(Context c) {
 	        context = c;
 	         for (int i = 0; i < 8; i++) {
-	             pictureList.add(R.drawable.question);
 	         }
 	    }
 
