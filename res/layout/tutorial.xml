@@ -10,24 +10,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="How to connect to a robot"
+            android:text="@string/tutorialtitle"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="In order to connect to the robot the robot must be powered on. Open up the wireless setting on the phone and connect to the robot’s SSID. If the router has a password enter the password like normal. " />
+            android:text="@string/tutorialtext1" />
 
         <ImageView
             android:id="@+id/imageView1"
+            android:contentDescription="@string/tutorialpicture1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ipsettings" />
@@ -36,10 +37,11 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Under IP Settings select Static. Set the IP Address as “10.XX.YY.5” with XX being the first two digits of your team number and YY being the last two digits. If the team number is less than four digits  add the appropriate number of zeros before the team number. The Gateway should be “10.XX.YY.1” and press Connect. Return to the app and the robot should be ready to drive." />
+            android:text="@string/tutorialtext2" />
 
         <ImageView
             android:id="@+id/imageView2"
+            android:contentDescription="@string/tutorialpicture2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ip" />
