@@ -268,4 +268,11 @@
             android:layout_alignRight="@+id/Joy2Buttons" />
     </RelativeLayout>
 
+    <com.aquamorph.frcdrive.Throttle
+        android:id="@+id/throttle1"
+        android:layout_width="60dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/robotState" />
+
 </RelativeLayout>

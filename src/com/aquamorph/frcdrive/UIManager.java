@@ -13,8 +13,9 @@ import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 
 import com.aquamorph.frcdrive.Joystick;
-import com.aquamorph.frcdrive.R;
 import com.aquamorph.frcdrive.Joystick.OnChangeListener;
+import com.aquamorph.frcdrive.Throttle;
+import com.aquamorph.frcdrive.Throttle.OnChangeListenerThrottle;
 
 public class UIManager {
 	public boolean enabled = false;
@@ -23,11 +24,13 @@ public class UIManager {
 	public byte joy1Y = 0;
 	public byte joy2X = 0;
 	public byte joy2Y = 0;
+	public byte throttleAxis1 = 0;
 	public boolean[] Joy1Bttns = new boolean[12];
 	public boolean[] Joy2Bttns = new boolean[12];
 
 	private Joystick joystick1;
 	private Joystick joystick2;
+	private Throttle throttle1;
 	private ToggleButton enableBttn;
 	private RadioButton enableAuto;
 	private ViewGroup Joy1Buttons;
@@ -40,6 +43,7 @@ public class UIManager {
 		// Initialize UI components.
 		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
 		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
+		throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
 		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
 		view = (View) activity.findViewById(R.id.controls);
@@ -47,6 +51,7 @@ public class UIManager {
 		// Set event listeners
 		joystick1.setOnChangeListener(joyListener1);
 		joystick2.setOnChangeListener(joyListener2);
+		throttle1.setOnChangeListener(throttleListener1);
 		enableBttn.setOnCheckedChangeListener(enableListener);
 		enableAuto.setOnCheckedChangeListener(autoListener);
 		
@@ -104,18 +109,18 @@ public class UIManager {
 		}
 	}
 
-	// Joystick1
+	// Joystick 1
 	OnChangeListener joyListener1 = new OnChangeListener() {
 
 		@Override
 		public boolean onChange(byte xAxis, byte yAxis) {
-			joy1X = (byte) (xAxis*(100/77));
+			joy1X = xAxis;
 			joy1Y = yAxis;
 			return false;
 		}
 	};
 
-	// Joystick2
+	// Joystick 2
 	OnChangeListener joyListener2 = new OnChangeListener() {
 
 		@Override
@@ -125,6 +130,19 @@ public class UIManager {
 			return false;
 		}
 	};
+	
+	//Throttle 1
+	OnChangeListenerThrottle throttleListener1 = new OnChangeListenerThrottle() {
+
+		@Override
+		public boolean onChange(byte axis) {
+			throttleAxis1 = axis;
+			return false;
+		}
+
+	};
+	
+	
 
 	// Enable button
 	OnCheckedChangeListener enableListener = new OnCheckedChangeListener() {
@@ -154,6 +172,5 @@ public class UIManager {
 		}
 
 	};
-	
 	
 }

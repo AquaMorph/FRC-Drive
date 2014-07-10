@@ -93,7 +93,7 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, Packets.JOY1);
+					rioPacket.setJoystick(ui.throttleAxis1, ui.joy1Y, Packets.JOY1);
 					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, Packets.JOY2);
 					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, Packets.JOY3);
 					rioPacket.setAuto(ui.auto);
