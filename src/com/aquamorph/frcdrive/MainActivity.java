@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.Switch;
 
 public class MainActivity extends Activity {
 	UIManager uiManager;
 	PacketSender sender;
-	Switch videoSwitch;
+	PhysicalJoystick physicalJoystick;
+	
 
 	// Menu
 	@Override
@@ -59,7 +59,10 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		uiManager = new UIManager(this);
-		sender = new PacketSender(this, uiManager);
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB_MR1) {
+			physicalJoystick = new PhysicalJoystick(this);
+		}
+		sender = new PacketSender(this, uiManager, physicalJoystick);
 		sender.start();
 	}
 

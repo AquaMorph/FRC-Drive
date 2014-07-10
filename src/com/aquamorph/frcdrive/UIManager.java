@@ -1,15 +1,10 @@
 package com.aquamorph.frcdrive;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
-import android.view.InputDevice;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnGenericMotionListener;
-import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -37,9 +32,9 @@ public class UIManager {
 	private RadioButton enableAuto;
 	private ViewGroup Joy1Buttons;
 	private ViewGroup Joy2Buttons;
-	private View mainView;
+	private View view;
+	
 
-	@SuppressLint("NewApi")
 	public UIManager(Activity activity) {
 
 		// Initialize UI components.
@@ -47,15 +42,15 @@ public class UIManager {
 		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
 		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
-		mainView = (View) activity.findViewById(R.id.controls);
+		view = (View) activity.findViewById(R.id.controls);
 
 		// Set event listeners
 		joystick1.setOnChangeListener(joyListener1);
 		joystick2.setOnChangeListener(joyListener2);
 		enableBttn.setOnCheckedChangeListener(enableListener);
 		enableAuto.setOnCheckedChangeListener(autoListener);
-		mainView.setOnGenericMotionListener(phyJoystickListener);
-		mainView.setOnKeyListener(phyButtonListener);
+		
+		
 		// Don't need tele listener because auto listener takes off auto
 		// mode and puts in tele.
 
@@ -68,7 +63,6 @@ public class UIManager {
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
-				@SuppressLint("ClickableViewAccessibility")
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					Log.d("Buttons", "Button hit: " + x);
@@ -94,8 +88,6 @@ public class UIManager {
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
-				@SuppressLint("ClickableViewAccessibility")
-				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					Log.d("Buttons", "Button hit: " + x);
 					switch (event.getAction()) {
@@ -162,112 +154,6 @@ public class UIManager {
 		}
 
 	};
-
-	// Listener for physical gamepad or controller without buttons.
-	OnGenericMotionListener phyJoystickListener = new OnGenericMotionListener() {
-
-		@SuppressLint("InlinedApi")
-		@Override
-		public boolean onGenericMotion(View view, MotionEvent event) {
-			if (event.getSource() == InputDevice.SOURCE_JOYSTICK
-					&& event.getAction() == MotionEvent.ACTION_MOVE) {
-
-				// Joystick 1 on the controller
-				joy1X = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_X));
-				joy1Y = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_Y));
-
-				// Joystick 2
-				joy2X = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_Z));
-				joy2Y = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_RZ));
-			}
-			return true;
-		}
-
-	};
-
-	// Physical button listener.
-	OnKeyListener phyButtonListener = new OnKeyListener() {
-
-		@Override
-		public boolean onKey(View view, int keyCode, KeyEvent event) {
-			if (event.getAction() == MotionEvent.ACTION_DOWN) {
-				switch (keyCode) {
-				case KeyEvent.KEYCODE_BUTTON_1:
-					Joy1Bttns[0] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_2:
-					Joy1Bttns[1] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_3:
-					Joy1Bttns[2] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_4:
-					Joy1Bttns[3] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_5:
-					Joy1Bttns[4] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_6:
-					Joy1Bttns[5] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_7:
-					Joy1Bttns[6] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_8:
-					Joy1Bttns[7] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_9:
-					Joy1Bttns[8] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_10:
-					Joy1Bttns[9] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_11:
-					Joy1Bttns[10] = true;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_12:
-					Joy1Bttns[11] = true;
-				}
-			} else if (event.getAction() == MotionEvent.ACTION_UP) {
-				switch (keyCode) {
-				case KeyEvent.KEYCODE_BUTTON_1:
-					Joy1Bttns[0] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_2:
-					Joy1Bttns[1] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_3:
-					Joy1Bttns[2] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_4:
-					Joy1Bttns[3] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_5:
-					Joy1Bttns[4] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_6:
-					Joy1Bttns[5] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_7:
-					Joy1Bttns[6] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_8:
-					Joy1Bttns[7] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_9:
-					Joy1Bttns[8] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_10:
-					Joy1Bttns[9] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_11:
-					Joy1Bttns[10] = false;
-					break;
-				case KeyEvent.KEYCODE_BUTTON_12:
-					Joy1Bttns[11] = false;
-				}
-			}
-			return true;
-		}
-	};
+	
+	
 }

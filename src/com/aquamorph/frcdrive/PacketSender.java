@@ -12,7 +12,7 @@ import android.content.Context;
 import android.net.wifi.WifiManager;
 import android.widget.TextView;
 
-import com.aquamorph.frcdrive.CRIOPacket;
+import com.aquamorph.frcdrive.Packets;
 import com.aquamorph.frcdrive.R;
 import com.aquamorph.frcdrive.UIManager;
 
@@ -22,16 +22,18 @@ public class PacketSender extends Thread{
 	private byte teamNum1;
 	private byte teamNum2;
 	private DatagramSocket sock;
-	private CRIOPacket rioPacket = new CRIOPacket();
+	private Packets rioPacket = new Packets();
 	private DatagramPacket packet;
 	private TextView messageLog;
 	private Activity activity;
 	private UIManager ui;
+	private PhysicalJoystick phyJoy;
 	private boolean isRobotNet = false;
 	
-	public PacketSender(Activity activity, UIManager uiMngr){
+	public PacketSender(Activity activity, UIManager uiMngr, PhysicalJoystick physicalJoystick){
 		this.activity = activity;
 		ui = uiMngr;
+		phyJoy = physicalJoystick;
 		
 		//Set up an error console.
 		messageLog = (TextView)activity.findViewById(R.id.control_log);
@@ -91,8 +93,9 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, CRIOPacket.JOY1);
-					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, CRIOPacket.JOY2);
+					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, Packets.JOY1);
+					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, Packets.JOY2);
+					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, Packets.JOY3);
 					rioPacket.setAuto(ui.auto);
 					rioPacket.setEnabled(ui.enabled);
 					rioPacket.makeCRC();

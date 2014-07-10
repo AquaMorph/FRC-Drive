@@ -2,26 +2,16 @@ package com.aquamorph.frcdrive;
 
 import java.util.zip.CRC32;
 
-public class CRIOPacket {
-	public byte[] data = new byte[1024]; // The byte array to hold everything.
+public class Packets {
+	public byte[] data = new byte[1024]; // Packet array
 
 	// Constants:
 	static int JOY1 = 8, JOY2 = 16, JOY3 = 24, JOY4 = 32;
 
-	/*
-	 * data[0] and data[1]: packet index data[2]: control byte: reset not_e_stop
-	 * enabled auto fms_attached resync test fpga data[3]: digital input bits.
-	 * data[4] and data[5]: team number data[6]: alliance, either red 'R' or
-	 * blue 'B' data[7]: position data[8]: joystick 1 x value data[9]: joystick
-	 * 1 y value data[14-15]: joystick 1 buttons bits backward format ...8 7 6 5
-	 * 4 3 2 1 data[1020] to data[1023]: CRC checksum.
-	 */
-	public CRIOPacket() {
-		data[2] |= 64; // Set the not_e_stop control bit.
+	public Packets() {
+		data[2] |= 64; // E Stop set to off
 
-		// Diverstation version, not sure if it needs this or not,
-		// I just used the numbers on the packets captured from the original
-		// driver station.
+		// Diverstation version
 		data[72] = (byte) 0x30;
 		data[73] = (byte) 0x31;
 		data[74] = (byte) 0x30;
@@ -42,13 +32,13 @@ public class CRIOPacket {
 		return (byte) ((i & 0xFF00) >> 8);
 	}
 
-//	private byte int2(int i) {
-//		return (byte) ((i & 0xFF0000) >> 16);
-//	}
-//
-//	private int int1(int i) {
-//		return (byte) ((i & 0xFF000000) >> 24);
-//	}
+	// private byte int2(int i) {
+	// return (byte) ((i & 0xFF0000) >> 16);
+	// }
+	//
+	// private int int1(int i) {
+	// return (byte) ((i & 0xFF000000) >> 24);
+	// }
 
 	// Set the packet index to the provided value
 	public void setIndex(int index) {
@@ -57,15 +47,15 @@ public class CRIOPacket {
 	}
 
 	// Set robot to autonomous mode
-	public void setAuto(boolean auto) {
-		if (auto)
+	public void setAuto(boolean state) {
+		if (state)
 			data[2] |= 16;
 		else
 			data[2] &= ~16;
 	}
 
-	public void setEnabled(boolean enabled) {
-		if (enabled)
+	public void setEnabled(boolean state) {
+		if (state)
 			data[2] |= 32;
 		else
 			data[2] &= ~32;
@@ -106,24 +96,43 @@ public class CRIOPacket {
 		data[joystick + 1] = (byte) -y;
 	}
 
-	//Set the buttons
+	// Set the buttons
 	public void setButton(int button, boolean set, int joystick) {
-		if (set){
-			if(joystick==1){
-				if(button<8)data[15] |= (byte) (Math.pow(2, button));
-				else data[14] |= (byte) (Math.pow(2, (button-8)));
-			} else if(joystick==2){
-				if(button<8)data[23] |= (byte) (Math.pow(2, button));
-				else data[22] |= (byte) (Math.pow(2, (button-8)));
+		if (set) {
+			if (joystick == 1) {
+				if (button < 8)
+					data[15] |= (byte) (Math.pow(2, button));
+				else
+					data[14] |= (byte) (Math.pow(2, (button - 8)));
+			} else if (joystick == 2) {
+				if (button < 8)
+					data[23] |= (byte) (Math.pow(2, button));
+				else
+					data[22] |= (byte) (Math.pow(2, (button - 8)));
+			}  else if (joystick == 3) {
+				if (button < 8){
+					data[31] |= (byte) (Math.pow(2, button));
+				} else
+					data[30] |= (byte) (Math.pow(2, (button - 8)));
+			}  else if (joystick == 4) {
+				if (button < 8)
+					data[39] |= (byte) (Math.pow(2, button));
+				else
+					data[38] |= (byte) (Math.pow(2, (button - 8)));
 			}
-		}
-		else {
-			if(joystick==1){
+		} else {
+			if (joystick == 1) {
 				data[15] &= ~((byte) Math.pow(2, button));
 				data[14] &= ~((byte) Math.pow(2, button));
-			} else if(joystick==2){
+			} else if (joystick == 2) {
 				data[23] &= ~((byte) Math.pow(2, button));
 				data[22] &= ~((byte) Math.pow(2, button));
+			} else if (joystick == 3) {
+				data[31] &= ~((byte) Math.pow(2, button));
+				data[30] &= ~((byte) Math.pow(2, button));
+			} else if (joystick == 4) {
+				data[39] &= ~((byte) Math.pow(2, button));
+				data[38] &= ~((byte) Math.pow(2, button));
 			}
 		}
 	}

@@ -27,5 +27,8 @@
     <string name="tutorialtext2">Under IP Settings select Static. Set the IP Address as “10.XX.YY.5” with XX being the first two digits of your team number and YY being the last two digits. If the team number is less than four digits add the appropriate number of zeros before the team number. The Gateway should be “10.XX.YY.1” and press Connect. Return to the app and the robot should be ready to drive.</string>
 	<string name="tutorialpicture1">Static</string>
 	<string name="tutorialpicture2">IP Address "10.20.59.5" Gateway "10.20.59.1"</string>
+	<string name="leftjoy">Left Onscreen Controller</string>
+	<string name="rightjoy">Right Onscreen Controller</string>
+	<string name="physicaljoy">Physical Controller</string>
     
 </resources>

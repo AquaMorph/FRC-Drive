@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="joystickports">
+        <item>USB 1</item>
+        <item>USB 2</item>
+        <item>USB 3</item>
+        <item>USB 4</item>
+    </string-array>
+    <string-array
+    name="joystickportsvalue">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>4</item>
+</string-array>  
+
+</resources>
