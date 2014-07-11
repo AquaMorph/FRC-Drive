@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 public class MainActivity extends Activity {
-	UIManager uiManager;
+	Controls uiManager;
 	PacketSender sender;
 	PhysicalJoystick physicalJoystick;
 	
@@ -58,7 +58,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		uiManager = new UIManager(this);
+		uiManager = new Controls(this);
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB_MR1) {
 			physicalJoystick = new PhysicalJoystick(this);
 		}

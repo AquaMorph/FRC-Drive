@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.aquamorph.frcdrive.Packets;
 import com.aquamorph.frcdrive.R;
-import com.aquamorph.frcdrive.UIManager;
+import com.aquamorph.frcdrive.Controls;
 
 public class PacketSender extends Thread{
 	
@@ -26,11 +26,11 @@ public class PacketSender extends Thread{
 	private DatagramPacket packet;
 	private TextView messageLog;
 	private Activity activity;
-	private UIManager ui;
+	private Controls ui;
 	private PhysicalJoystick phyJoy;
 	private boolean isRobotNet = false;
 	
-	public PacketSender(Activity activity, UIManager uiMngr, PhysicalJoystick physicalJoystick){
+	public PacketSender(Activity activity, Controls uiMngr, PhysicalJoystick physicalJoystick){
 		this.activity = activity;
 		ui = uiMngr;
 		phyJoy = physicalJoystick;
@@ -93,9 +93,9 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-					rioPacket.setJoystick(ui.throttleAxis1, ui.joy1Y, Packets.JOY1);
-					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, Packets.JOY2);
-					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, Packets.JOY3);
+					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, ui.throttleAxis1,(byte) 0,Packets.JOY1);
+					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, ui.throttleAxis2, (byte) 0, Packets.JOY2);
+					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, phyJoy.joyPhy2X, phyJoy.joyPhy2Y, Packets.JOY3);
 					rioPacket.setAuto(ui.auto);
 					rioPacket.setEnabled(ui.enabled);
 					rioPacket.makeCRC();

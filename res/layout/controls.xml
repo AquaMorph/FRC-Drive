@@ -18,8 +18,8 @@
             android:id="@+id/control_log"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:lines="1" />
+            android:lines="1"
+            android:visibility="gone" />
 
         <RadioGroup
             android:id="@+id/run_mode"
@@ -159,6 +159,12 @@
             android:layout_below="@+id/Joy1Buttons"
             android:clickable="true" />
 
+        <com.aquamorph.frcdrive.Throttle
+            android:id="@+id/throttle1"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/Joy1Buttons"
+            android:layout_toRightOf="@+id/joystick1" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -264,15 +270,15 @@
             android:id="@+id/joystick2"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:layout_below="@+id/Joy2Buttons"
-            android:layout_alignRight="@+id/Joy2Buttons" />
-    </RelativeLayout>
+            android:layout_alignRight="@+id/Joy2Buttons"
+            android:layout_below="@+id/Joy2Buttons" />
 
-    <com.aquamorph.frcdrive.Throttle
-        android:id="@+id/throttle1"
-        android:layout_width="60dp"
-        android:layout_height="200dp"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/robotState" />
+        <com.aquamorph.frcdrive.Throttle
+            android:id="@+id/throttle2"
+            android:layout_width="60dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/Joy2Buttons"
+            android:layout_toLeftOf="@+id/joystick2" />
+    </RelativeLayout>
 
 </RelativeLayout>

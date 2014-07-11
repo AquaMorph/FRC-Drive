@@ -17,7 +17,7 @@ import com.aquamorph.frcdrive.Joystick.OnChangeListener;
 import com.aquamorph.frcdrive.Throttle;
 import com.aquamorph.frcdrive.Throttle.OnChangeListenerThrottle;
 
-public class UIManager {
+public class Controls {
 	public boolean enabled = false;
 	public boolean auto = false;
 	public byte joy1X = 0;
@@ -25,12 +25,14 @@ public class UIManager {
 	public byte joy2X = 0;
 	public byte joy2Y = 0;
 	public byte throttleAxis1 = 0;
+	public byte throttleAxis2 = 0;
 	public boolean[] Joy1Bttns = new boolean[12];
 	public boolean[] Joy2Bttns = new boolean[12];
 
 	private Joystick joystick1;
 	private Joystick joystick2;
 	private Throttle throttle1;
+	private Throttle throttle2;
 	private ToggleButton enableBttn;
 	private RadioButton enableAuto;
 	private ViewGroup Joy1Buttons;
@@ -38,20 +40,22 @@ public class UIManager {
 	private View view;
 	
 
-	public UIManager(Activity activity) {
+	public Controls(Activity activity) {
 
 		// Initialize UI components.
+		view = (View) activity.findViewById(R.id.controls);
 		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
 		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
 		throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
+		throttle2 = (Throttle) activity.findViewById(R.id.throttle2);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
 		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
-		view = (View) activity.findViewById(R.id.controls);
 
 		// Set event listeners
 		joystick1.setOnChangeListener(joyListener1);
 		joystick2.setOnChangeListener(joyListener2);
 		throttle1.setOnChangeListener(throttleListener1);
+		throttle2.setOnChangeListener(throttleListener2);
 		enableBttn.setOnCheckedChangeListener(enableListener);
 		enableAuto.setOnCheckedChangeListener(autoListener);
 		
@@ -142,7 +146,16 @@ public class UIManager {
 
 	};
 	
-	
+	//Throttle 2
+		OnChangeListenerThrottle throttleListener2 = new OnChangeListenerThrottle() {
+
+			@Override
+			public boolean onChange(byte axis) {
+				throttleAxis2 = axis;
+				return false;
+			}
+
+		};
 
 	// Enable button
 	OnCheckedChangeListener enableListener = new OnCheckedChangeListener() {
