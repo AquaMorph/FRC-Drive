@@ -7,12 +7,27 @@
         <item>USB 3</item>
         <item>USB 4</item>
     </string-array>
-    <string-array
-    name="joystickportsvalue">
-    <item>1</item>
-    <item>2</item>
-    <item>3</item>
-    <item>4</item>
-</string-array>  
+    <string-array name="joystickportsvalue">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array  name="throttleaxis">
+        <item>Axis 1</item>
+        <item>Axis 2</item>
+        <item>Axis 3</item>
+        <item>Axis 4</item>
+        <item>Axis 5</item>
+        <item>Axis 6</item>
+    </string-array>
+    <string-array  name="throttleaxisvalue">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
 
 </resources>

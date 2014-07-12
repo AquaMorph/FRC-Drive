@@ -5,29 +5,51 @@
         android:action="android.intent.action.VIEW"
         android:targetClass="com.aquamorph.frcdrive.Preference"
         android:targetPackage="com.aquamorph.frcdrive" />
+
     <PreferenceCategory
         android:summary="USB Ports"
         android:title="USB Ports" >
-    <ListPreference android:key="leftjoy"
- 	 	    android:title="@string/leftjoy"
- 		    android:entries="@array/joystickports"
-		    android:entryValues="@array/joystickportsvalue"
-    		android:defaultValue="1"
-    		android:summary="Set the USB port" />
-    <ListPreference android:key="rightjoy"
- 	 	    android:title="@string/rightjoy"
- 		    android:entries="@array/joystickports"
-		    android:entryValues="@array/joystickportsvalue"
-    		android:defaultValue="2"
-    		android:summary="Set the USB port" />
-    <ListPreference android:key="physicaljoy"
- 	 	    android:title="@string/physicaljoy"
- 		    android:entries="@array/joystickports"
-		    android:entryValues="@array/joystickportsvalue"
-    		android:defaultValue="3"
-    		android:summary="Set the USB port" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/joystickports"
+            android:entryValues="@array/joystickportsvalue"
+            android:key="leftjoy"
+            android:summary="Set the USB port"
+            android:title="@string/leftjoy" />
+        <ListPreference
+            android:defaultValue="2"
+            android:entries="@array/joystickports"
+            android:entryValues="@array/joystickportsvalue"
+            android:key="rightjoy"
+            android:summary="Set the USB port"
+            android:title="@string/rightjoy" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/joystickports"
+            android:entryValues="@array/joystickportsvalue"
+            android:key="physicaljoy"
+            android:summary="Set the USB port"
+            android:title="@string/physicaljoy" />
     </PreferenceCategory>
-    <PreferenceCategory
+    <PreferenceCategory
+        android:summary="Throttle Axis"
+        android:title="Throttle Axis" >
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/throttleaxis"
+            android:entryValues="@array/throttleaxisvalue"
+            android:key="leftthrottle"
+            android:summary="Set the axis"
+            android:title="@string/leftthrottle" />
+        <ListPreference
+            android:defaultValue="3"
+            android:entries="@array/throttleaxis"
+            android:entryValues="@array/throttleaxisvalue"
+            android:key="rightthrottle"
+            android:summary="Set the axis"
+            android:title="@string/rightthrottle" />
+    </PreferenceCategory>
+    <PreferenceCategory
         android:summary="About"
         android:title="About" >
         <PreferenceScreen

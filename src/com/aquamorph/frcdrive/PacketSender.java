@@ -15,10 +15,6 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.aquamorph.frcdrive.Packets;
-import com.aquamorph.frcdrive.R;
-import com.aquamorph.frcdrive.Controls;
-
 public class PacketSender extends Thread{
 	
 	private int packetIndex;;
@@ -34,6 +30,8 @@ public class PacketSender extends Thread{
 	private int leftjoy;
 	private int rightjoy;
 	private int physicaljoy;
+	private int leftthrottle;
+	private int rightthrottle;
 	private boolean isRobotNet = false;
 	private byte[] joystick1Axis= new byte[6];
 	private byte[] joystick2Axis= new byte[6];
@@ -45,6 +43,8 @@ public class PacketSender extends Thread{
 		leftjoy = Integer.parseInt(settings.getString("leftjoy", "1"));
 		rightjoy = Integer.parseInt(settings.getString("rightjoy", "2"));
 		physicaljoy = Integer.parseInt(settings.getString("physicaljoy", "3"));
+		leftthrottle = Integer.parseInt(settings.getString("leftthrottle", "3"))-1;
+		rightthrottle = Integer.parseInt(settings.getString("rightthrottle", "3"))-1;
 		this.activity = activity;
 		ui = uiMngr;
 		phyJoy = physicalJoystick;
@@ -112,41 +112,43 @@ public class PacketSender extends Thread{
 					arrayReset(joystick4Axis);
 					
 					//Left onscreen controls
+					Log.i("Throttle", "leftthrottle" + leftthrottle);
 					if(leftjoy==1) {
 						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy1X);
 						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy1Y);
-						joystick1Axis[2]=(byte) (joystick1Axis[2]+ui.throttleAxis1);
+						joystick1Axis[leftthrottle]=(byte) (joystick1Axis[leftthrottle]+ui.throttleAxis1);
 					} else if(leftjoy==2) {
 						joystick2Axis[0]=(byte) (joystick2Axis[0]+ui.joy1X);
 						joystick2Axis[1]=(byte) (joystick2Axis[1]+ui.joy1Y);
-						joystick2Axis[2]=(byte) (joystick2Axis[2]+ui.throttleAxis1);
+						joystick2Axis[leftthrottle]=(byte) (joystick2Axis[leftthrottle]+ui.throttleAxis1);
 					} else if(leftjoy==3) {
 						joystick3Axis[0]=(byte) (joystick3Axis[0]+ui.joy1X);
 						joystick3Axis[1]=(byte) (joystick3Axis[1]+ui.joy1Y);
-						joystick3Axis[2]=(byte) (joystick3Axis[2]+ui.throttleAxis1);
+						joystick3Axis[leftthrottle]=(byte) (joystick3Axis[leftthrottle]+ui.throttleAxis1);
 					} else if(leftjoy==4) {
 						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy1X);
 						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy1Y);
-						joystick4Axis[2]=(byte) (joystick4Axis[2]+ui.throttleAxis1);
+						joystick4Axis[leftthrottle]=(byte) (joystick4Axis[leftthrottle]+ui.throttleAxis1);
 					}
 					
 					//Right onscreen controls
+					Log.i("Throttle", "rightthrottle" + rightthrottle);
 					if(rightjoy==1) {
 						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy2X);
 						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy2Y);
-						joystick1Axis[2]=(byte) (joystick1Axis[2]+ui.throttleAxis2);
+						joystick1Axis[rightthrottle]=(byte) (joystick1Axis[rightthrottle]+ui.throttleAxis2);
 					} else if(rightjoy==2) {
 						joystick2Axis[0]=(byte) (joystick2Axis[0]+ui.joy2X);
 						joystick2Axis[1]=(byte) (joystick2Axis[1]+ui.joy2Y);
-						joystick2Axis[2]=(byte) (joystick2Axis[2]+ui.throttleAxis2);
+						joystick2Axis[rightthrottle]=(byte) (joystick2Axis[rightthrottle]+ui.throttleAxis2);
 					} else if(rightjoy==3) {
 						joystick3Axis[0]=(byte) (joystick3Axis[0]+ui.joy2X);
 						joystick3Axis[1]=(byte) (joystick3Axis[1]+ui.joy2Y);
-						joystick3Axis[2]=(byte) (joystick3Axis[2]+ui.throttleAxis2);
+						joystick3Axis[rightthrottle]=(byte) (joystick3Axis[rightthrottle]+ui.throttleAxis2);
 					} else if(rightjoy==4) {
 						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy2X);
 						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy2Y);
-						joystick4Axis[2]=(byte) (joystick4Axis[2]+ui.throttleAxis2);
+						joystick4Axis[rightthrottle]=(byte) (joystick4Axis[rightthrottle]+ui.throttleAxis2);
 					}
 					
 					//Physical controls
@@ -172,17 +174,16 @@ public class PacketSender extends Thread{
 						joystick4Axis[3]=(byte) (joystick4Axis[3]+phyJoy.joyPhy2Y);
 					}
 					
+					//Buttons
 					for(int i = 0; i < 12; i++)	{
-						rioPacket.setButton(i, ui.Joy1Bttns[i],1);
-						rioPacket.setButton(i, ui.Joy2Bttns[i],2);
+						rioPacket.setButton(i, ui.Joy1Bttns[i],leftjoy);
+						rioPacket.setButton(i, ui.Joy2Bttns[i],rightjoy);
+						rioPacket.setButton(i, phyJoy.Joy3Bttns[i],physicaljoy);
 					}
 					for(int i = 0; i < 8; i++)	{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-//					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, ui.throttleAxis1,(byte) 0, ui.joy1X, ui.joy1X,Packets.JOY1);
-//					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, ui.throttleAxis2, (byte) 0, (byte) 0, (byte) 0, Packets.JOY2);
-//					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, phyJoy.joyPhy2X, phyJoy.joyPhy2Y, (byte) 0, (byte) 0, Packets.JOY3);
 					rioPacket.setJoystick(joystick1Axis[0], joystick1Axis[1], joystick1Axis[2], joystick1Axis[3], joystick1Axis[4], joystick1Axis[5], Packets.JOY1);
 					rioPacket.setJoystick(joystick2Axis[0], joystick2Axis[1], joystick2Axis[2], joystick2Axis[3], joystick2Axis[4], joystick2Axis[5], Packets.JOY2);
 					rioPacket.setJoystick(joystick3Axis[0], joystick3Axis[1], joystick3Axis[2], joystick3Axis[3], joystick3Axis[4], joystick3Axis[5], Packets.JOY3);

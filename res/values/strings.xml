@@ -30,5 +30,7 @@
 	<string name="leftjoy">Left Onscreen Controller</string>
 	<string name="rightjoy">Right Onscreen Controller</string>
 	<string name="physicaljoy">Physical Controller</string>
+	<string name="leftthrottle">Left Onscreen Throttle</string>
+	<string name="rightthrottle">Right Onscreen Throttle</string>
     
 </resources>

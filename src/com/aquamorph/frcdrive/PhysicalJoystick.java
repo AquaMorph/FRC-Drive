@@ -35,12 +35,12 @@ public class PhysicalJoystick {
 					&& event.getAction() == MotionEvent.ACTION_MOVE) {
 
 				// Joystick 1 on the controller
-				joyPhy1X = (byte) (128 * event.getAxisValue(MotionEvent.AXIS_X));
-				joyPhy1Y = (byte) (128 * event.getAxisValue(MotionEvent.AXIS_Y));
+				joyPhy1X = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_X));
+				joyPhy1Y = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_Y));
 
 				// Joystick 2
-				joyPhy2X = (byte) (128 * event.getAxisValue(MotionEvent.AXIS_Z));
-				joyPhy2Y = (byte) (128 * event
+				joyPhy2X = (byte) (127 * event.getAxisValue(MotionEvent.AXIS_Z));
+				joyPhy2Y = (byte) (127 * event
 						.getAxisValue(MotionEvent.AXIS_RZ));
 			}
 			return true;
