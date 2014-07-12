@@ -91,11 +91,13 @@ public class Packets {
 	}
 
 	// Set the joystick
-	public void setJoystick(byte x, byte y, byte z, byte s, int joystick) {
+	public void setJoystick(byte x, byte y, byte z, byte i, byte j, byte k, int joystick) {
 		data[joystick] = x;
 		data[joystick + 1] = (byte) -y;
 		data[joystick + 2] = z;
-		data[joystick + 3] = s;
+		data[joystick + 3] = i;
+		data[joystick + 4] = j;
+		data[joystick + 5] = k;
 	}
 
 	// Set the buttons

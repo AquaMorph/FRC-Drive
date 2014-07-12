@@ -59,6 +59,7 @@ public class Controls {
 		enableBttn.setOnCheckedChangeListener(enableListener);
 		enableAuto.setOnCheckedChangeListener(autoListener);
 		
+		enableBttn.setChecked(enabled);
 		
 		// Don't need tele listener because auto listener takes off auto
 		// mode and puts in tele.

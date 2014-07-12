@@ -9,7 +9,10 @@ import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.aquamorph.frcdrive.Packets;
@@ -28,9 +31,20 @@ public class PacketSender extends Thread{
 	private Activity activity;
 	private Controls ui;
 	private PhysicalJoystick phyJoy;
+	private int leftjoy;
+	private int rightjoy;
+	private int physicaljoy;
 	private boolean isRobotNet = false;
+	private byte[] joystick1Axis= new byte[6];
+	private byte[] joystick2Axis= new byte[6];
+	private byte[] joystick3Axis= new byte[6];
+	private byte[] joystick4Axis= new byte[6];
 	
-	public PacketSender(Activity activity, Controls uiMngr, PhysicalJoystick physicalJoystick){
+	public PacketSender(Activity activity, Controls uiMngr, PhysicalJoystick physicalJoystick) {
+		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity);
+		leftjoy = Integer.parseInt(settings.getString("leftjoy", "1"));
+		rightjoy = Integer.parseInt(settings.getString("rightjoy", "2"));
+		physicaljoy = Integer.parseInt(settings.getString("physicaljoy", "3"));
 		this.activity = activity;
 		ui = uiMngr;
 		phyJoy = physicalJoystick;
@@ -77,6 +91,13 @@ public class PacketSender extends Thread{
 		}
 	}
 	
+	public byte[] arrayReset(byte[] array) {
+		for(int i=0;array.length>i;i++) {
+			array[i]=(byte) 0;
+		}
+		return array;
+	}
+	
 
 	
 	//Thread function.
@@ -84,7 +105,73 @@ public class PacketSender extends Thread{
 	public void run(){
 		//Set all of the fields in the packet and send it, then wait for 20 ms.
 			try {
-				while(isRobotNet){
+				while(isRobotNet) {
+					arrayReset(joystick1Axis);
+					arrayReset(joystick2Axis);
+					arrayReset(joystick3Axis);
+					arrayReset(joystick4Axis);
+					
+					//Left onscreen controls
+					if(leftjoy==1) {
+						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy1X);
+						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy1Y);
+						joystick1Axis[2]=(byte) (joystick1Axis[2]+ui.throttleAxis1);
+					} else if(leftjoy==2) {
+						joystick2Axis[0]=(byte) (joystick2Axis[0]+ui.joy1X);
+						joystick2Axis[1]=(byte) (joystick2Axis[1]+ui.joy1Y);
+						joystick2Axis[2]=(byte) (joystick2Axis[2]+ui.throttleAxis1);
+					} else if(leftjoy==3) {
+						joystick3Axis[0]=(byte) (joystick3Axis[0]+ui.joy1X);
+						joystick3Axis[1]=(byte) (joystick3Axis[1]+ui.joy1Y);
+						joystick3Axis[2]=(byte) (joystick3Axis[2]+ui.throttleAxis1);
+					} else if(leftjoy==4) {
+						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy1X);
+						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy1Y);
+						joystick4Axis[2]=(byte) (joystick4Axis[2]+ui.throttleAxis1);
+					}
+					
+					//Right onscreen controls
+					if(rightjoy==1) {
+						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy2X);
+						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy2Y);
+						joystick1Axis[2]=(byte) (joystick1Axis[2]+ui.throttleAxis2);
+					} else if(rightjoy==2) {
+						joystick2Axis[0]=(byte) (joystick2Axis[0]+ui.joy2X);
+						joystick2Axis[1]=(byte) (joystick2Axis[1]+ui.joy2Y);
+						joystick2Axis[2]=(byte) (joystick2Axis[2]+ui.throttleAxis2);
+					} else if(rightjoy==3) {
+						joystick3Axis[0]=(byte) (joystick3Axis[0]+ui.joy2X);
+						joystick3Axis[1]=(byte) (joystick3Axis[1]+ui.joy2Y);
+						joystick3Axis[2]=(byte) (joystick3Axis[2]+ui.throttleAxis2);
+					} else if(rightjoy==4) {
+						joystick4Axis[0]=(byte) (joystick4Axis[0]+ui.joy2X);
+						joystick4Axis[1]=(byte) (joystick4Axis[1]+ui.joy2Y);
+						joystick4Axis[2]=(byte) (joystick4Axis[2]+ui.throttleAxis2);
+					}
+					
+					//Physical controls
+					if(physicaljoy==1) {
+						joystick1Axis[0]=(byte) (joystick1Axis[0]+phyJoy.joyPhy1X);
+						joystick1Axis[1]=(byte) (joystick1Axis[1]+phyJoy.joyPhy1Y);
+						joystick1Axis[2]=(byte) (joystick1Axis[2]+phyJoy.joyPhy2X);
+						joystick1Axis[3]=(byte) (joystick1Axis[3]+phyJoy.joyPhy2Y);
+					} else if(physicaljoy==2) {
+						joystick2Axis[0]=(byte) (joystick2Axis[0]+phyJoy.joyPhy1X);
+						joystick2Axis[1]=(byte) (joystick2Axis[1]+phyJoy.joyPhy1Y);
+						joystick2Axis[2]=(byte) (joystick2Axis[2]+phyJoy.joyPhy2X);
+						joystick2Axis[3]=(byte) (joystick2Axis[3]+phyJoy.joyPhy2Y);
+					} else if(physicaljoy==3) {
+						joystick3Axis[0]=(byte) (joystick3Axis[0]+phyJoy.joyPhy1X);
+						joystick3Axis[1]=(byte) (joystick3Axis[1]+phyJoy.joyPhy1Y);
+						joystick3Axis[2]=(byte) (joystick3Axis[2]+phyJoy.joyPhy2X);
+						joystick3Axis[3]=(byte) (joystick3Axis[3]+phyJoy.joyPhy2Y);
+					} else if(physicaljoy==4) {
+						joystick4Axis[0]=(byte) (joystick4Axis[0]+phyJoy.joyPhy1X);
+						joystick4Axis[1]=(byte) (joystick4Axis[1]+phyJoy.joyPhy1Y);
+						joystick4Axis[2]=(byte) (joystick4Axis[2]+phyJoy.joyPhy2X);
+						joystick4Axis[3]=(byte) (joystick4Axis[3]+phyJoy.joyPhy2Y);
+					}
+					
 					for(int i = 0; i < 12; i++)	{
 						rioPacket.setButton(i, ui.Joy1Bttns[i],1);
 						rioPacket.setButton(i, ui.Joy2Bttns[i],2);
@@ -93,9 +180,13 @@ public class PacketSender extends Thread{
 						rioPacket.setDigitalIn(i, true);
 					}
 					rioPacket.setIndex(packetIndex);
-					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, ui.throttleAxis1,(byte) 0,Packets.JOY1);
-					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, ui.throttleAxis2, (byte) 0, Packets.JOY2);
-					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, phyJoy.joyPhy2X, phyJoy.joyPhy2Y, Packets.JOY3);
+//					rioPacket.setJoystick(ui.joy1X, ui.joy1Y, ui.throttleAxis1,(byte) 0, ui.joy1X, ui.joy1X,Packets.JOY1);
+//					rioPacket.setJoystick(ui.joy2X, ui.joy2Y, ui.throttleAxis2, (byte) 0, (byte) 0, (byte) 0, Packets.JOY2);
+//					rioPacket.setJoystick(phyJoy.joyPhy1X, phyJoy.joyPhy1Y, phyJoy.joyPhy2X, phyJoy.joyPhy2Y, (byte) 0, (byte) 0, Packets.JOY3);
+					rioPacket.setJoystick(joystick1Axis[0], joystick1Axis[1], joystick1Axis[2], joystick1Axis[3], joystick1Axis[4], joystick1Axis[5], Packets.JOY1);
+					rioPacket.setJoystick(joystick2Axis[0], joystick2Axis[1], joystick2Axis[2], joystick2Axis[3], joystick2Axis[4], joystick2Axis[5], Packets.JOY2);
+					rioPacket.setJoystick(joystick3Axis[0], joystick3Axis[1], joystick3Axis[2], joystick3Axis[3], joystick3Axis[4], joystick3Axis[5], Packets.JOY3);
+					rioPacket.setJoystick(joystick4Axis[0], joystick4Axis[1], joystick4Axis[2], joystick4Axis[3], joystick4Axis[4], joystick4Axis[5], Packets.JOY4);
 					rioPacket.setAuto(ui.auto);
 					rioPacket.setEnabled(ui.enabled);
 					rioPacket.makeCRC();
