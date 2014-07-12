@@ -12,7 +12,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.widget.TextView;
 
 public class PacketSender extends Thread{
@@ -112,7 +111,6 @@ public class PacketSender extends Thread{
 					arrayReset(joystick4Axis);
 					
 					//Left onscreen controls
-					Log.i("Throttle", "leftthrottle" + leftthrottle);
 					if(leftjoy==1) {
 						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy1X);
 						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy1Y);
@@ -132,7 +130,6 @@ public class PacketSender extends Thread{
 					}
 					
 					//Right onscreen controls
-					Log.i("Throttle", "rightthrottle" + rightthrottle);
 					if(rightjoy==1) {
 						joystick1Axis[0]=(byte) (joystick1Axis[0]+ui.joy2X);
 						joystick1Axis[1]=(byte) (joystick1Axis[1]+ui.joy2Y);

@@ -1,5 +1,6 @@
 package com.aquamorph.frcdrive;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -11,7 +12,6 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-
 import com.aquamorph.frcdrive.Joystick;
 import com.aquamorph.frcdrive.Joystick.OnChangeListener;
 import com.aquamorph.frcdrive.Throttle;
@@ -37,13 +37,12 @@ public class Controls {
 	private RadioButton enableAuto;
 	private ViewGroup Joy1Buttons;
 	private ViewGroup Joy2Buttons;
-	private View view;
 	
 
+	@SuppressLint("ClickableViewAccessibility")
 	public Controls(Activity activity) {
 
 		// Initialize UI components.
-		view = (View) activity.findViewById(R.id.controls);
 		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
 		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
 		throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
@@ -73,6 +72,7 @@ public class Controls {
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
+				@SuppressLint("ClickableViewAccessibility")
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					Log.d("Buttons", "Button hit: " + x);
