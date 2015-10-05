@@ -1,4 +1,0 @@
-1.0.1
-Added two onscreen throttles
-USB Port Selection
-Throttle Axis Selection

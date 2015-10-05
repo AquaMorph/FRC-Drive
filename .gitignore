@@ -1,13 +1,45 @@
-local.properties
+marketing/
+
+# built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
 bin/
 gen/
-libs/
-obj/
+out/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Eclipse project files
 .classpath
 .project
-.settings/
+
+# Windows thumbnail db
+.DS_Store
+
+# IDEA/Android Studio project files, because
+# the project can be imported from settings.gradle
 .idea
-proguard-project.txt
-ic_launcher-web.png
-project.properties
-apk/frcdrive
+*.iml
+
+# Old-style IDEA project files
+*.ipr
+*.iws
+
+# Local IDEA workspace
+.idea/workspace.xml
+
+# Gradle cache
+.gradle
+
+# Sandbox stuff
+_sandbox
