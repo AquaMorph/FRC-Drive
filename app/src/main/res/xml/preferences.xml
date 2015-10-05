@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/res/android" >
 
-    <intent
-        android:action="android.intent.action.VIEW"
-        android:targetClass="com.aquamorph.frcdrive.Preference"
-        android:targetPackage="com.aquamorph.frcdrive" />
-
     <PreferenceCategory
         android:summary="USB Ports"
         android:title="USB Ports" >
