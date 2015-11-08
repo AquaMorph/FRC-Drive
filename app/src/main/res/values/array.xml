@@ -13,7 +13,8 @@
         <item>3</item>
         <item>4</item>
     </string-array>
-    <string-array  name="throttleaxis">
+
+    <string-array name="throttleaxis">
         <item>Axis 1</item>
         <item>Axis 2</item>
         <item>Axis 3</item>
@@ -21,13 +22,22 @@
         <item>Axis 5</item>
         <item>Axis 6</item>
     </string-array>
-    <string-array  name="throttleaxisvalue">
+    <string-array name="throttleaxisvalue">
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
         <item>5</item>
         <item>6</item>
+    </string-array>
+
+    <string-array name="protocol">
+        <item>2014 Drive Station</item>
+        <item>2015 Drive Station</item>
+    </string-array>
+    <string-array name="protocolvslue">
+        <item>2014</item>
+        <item>2015</item>
     </string-array>
 
 </resources>

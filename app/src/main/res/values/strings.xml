@@ -32,5 +32,6 @@
     <string name="physicaljoy">Physical Controller</string>
     <string name="leftthrottle">Left Onscreen Throttle</string>
     <string name="rightthrottle">Right Onscreen Throttle</string>
+    <string name="protocol">Protocol Version</string>
 
 </resources>
