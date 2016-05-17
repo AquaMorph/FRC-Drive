@@ -1,19 +1,34 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
     android:id="@+id/controls"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
-    <android.support.v7.widget.Toolbar
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/primary"
-        android:theme="@style/Toolbar"
-        android:popupTheme="@style/Theme.AppCompat.Light"/>
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
         android:id="@+id/robotState"
@@ -21,20 +36,20 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/control_log"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lines="1"
-            android:visibility="gone" />
+            android:visibility="gone"/>
 
         <RadioGroup
             android:id="@+id/run_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <RadioButton
                 android:id="@+id/run_teleop"
@@ -42,14 +57,14 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="@string/teleoperated"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
 
             <RadioButton
                 android:id="@+id/run_autonomous"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/autonomous"
-                android:textSize="20sp" />
+                android:textSize="20sp"/>
         </RadioGroup>
 
         <ToggleButton
@@ -58,7 +73,7 @@
             android:layout_height="wrap_content"
             android:textOff="Disabled"
             android:textOn="Enabled"
-            android:textSize="25sp" />
+            android:textSize="25sp"/>
     </LinearLayout>
 
     <RelativeLayout
@@ -66,98 +81,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true" >
+        android:layout_alignParentLeft="true">
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/Joy1Buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:columnCount="6"
-            app:rowCount="2" >
+            app:rowCount="2">
 
             <Button
                 android:id="@+id/Joy1Button1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/one" />
+                android:text="@string/one"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/two" />
+                android:text="@string/two"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/three" />
+                android:text="@string/three"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button4"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/four" />
+                android:text="@string/four"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button5"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/five" />
+                android:text="@string/five"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button6"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/six" />
+                android:text="@string/six"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/seven" />
+                android:text="@string/seven"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button8"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/eight" />
+                android:text="@string/eight"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button9"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/nine" />
+                android:text="@string/nine"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button10"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/ten" />
+                android:text="@string/ten"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button11"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/eleven" />
+                android:text="@string/eleven"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy1Button12"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/twelve" />
+                android:text="@string/twelve"
+                app:layout_gravity="left"/>
         </android.support.v7.widget.GridLayout>
 
         <com.aquamorph.frcdrive.Joystick
@@ -166,14 +181,14 @@
             android:layout_height="150dp"
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/Joy1Buttons"
-            android:clickable="true" />
+            android:clickable="true"/>
 
         <com.aquamorph.frcdrive.Throttle
             android:id="@+id/throttle1"
             android:layout_width="60dp"
             android:layout_height="150dp"
             android:layout_below="@+id/Joy1Buttons"
-            android:layout_toRightOf="@+id/joystick1" />
+            android:layout_toRightOf="@+id/joystick1"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -181,98 +196,98 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" >
+        android:layout_alignParentRight="true">
 
         <android.support.v7.widget.GridLayout
             android:id="@+id/Joy2Buttons"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:columnCount="6"
-            app:rowCount="2" >
+            app:rowCount="2">
 
             <Button
                 android:id="@+id/Joy2Button1"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/one" />
+                android:text="@string/one"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button2"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/two" />
+                android:text="@string/two"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button3"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/three" />
+                android:text="@string/three"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button4"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/four" />
+                android:text="@string/four"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button5"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/five" />
+                android:text="@string/five"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button6"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/six" />
+                android:text="@string/six"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button7"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/seven" />
+                android:text="@string/seven"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button8"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/eight" />
+                android:text="@string/eight"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button9"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/nine" />
+                android:text="@string/nine"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button10"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/ten" />
+                android:text="@string/ten"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button11"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/eleven" />
+                android:text="@string/eleven"
+                app:layout_gravity="left"/>
 
             <Button
                 android:id="@+id/Joy2Button12"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_gravity="left"
-                android:text="@string/twelve" />
+                android:text="@string/twelve"
+                app:layout_gravity="left"/>
         </android.support.v7.widget.GridLayout>
 
         <com.aquamorph.frcdrive.Joystick
@@ -280,14 +295,14 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_alignRight="@+id/Joy2Buttons"
-            android:layout_below="@+id/Joy2Buttons" />
+            android:layout_below="@+id/Joy2Buttons"/>
 
         <com.aquamorph.frcdrive.Throttle
             android:id="@+id/throttle2"
             android:layout_width="60dp"
             android:layout_height="150dp"
             android:layout_below="@+id/Joy2Buttons"
-            android:layout_toLeftOf="@+id/joystick2" />
+            android:layout_toLeftOf="@+id/joystick2"/>
     </RelativeLayout>
 
 </RelativeLayout>
