@@ -3,7 +3,7 @@ os: windows
 android:
   components:
     # The BuildTools version used by your project
-    - build-tools-23.0.1
+    - build-tools-23.0.3
 
     # The SDK version used to compile your project
     - android-23
