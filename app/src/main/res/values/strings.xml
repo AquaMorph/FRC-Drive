@@ -10,6 +10,8 @@
     <string name="wifi">Change Wifi Settings</string>
     <string name="teleoperated">Teleoperated</string>
     <string name="autonomous">Autonomous</string>
+    <string name="enabled">Enabled</string>
+    <string name="disabled">Disabled</string>
     <string name="one">1</string>
     <string name="two">2</string>
     <string name="three">3</string>

@@ -31,33 +31,38 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.v7.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_below="@+id/appbar"
-        android:layout_weight="0.3">
+        android:layout_weight="0.3"
+        android:baselineAligned="false"
+        app:columnCount='2'
+        app:rowCount='1'>
 
         <include
             android:id="@+id/leftButtons"
             layout="@layout/button"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight=".50"/>
+            app:layout_columnWeight="1"
+            app:layout_gravity="fill"
+            app:layout_rowWeight="1"/>
 
         <include
             android:id="@+id/rightButtons"
             layout="@layout/button"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight=".50"/>
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1"/>
 
-    </LinearLayout>
+    </android.support.v7.widget.GridLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7">
-
+        android:layout_weight="0.7"
+        android:baselineAligned="false">
 
         <LinearLayout
             android:id="@+id/joystick1Controls"
@@ -118,8 +123,8 @@
                 android:id="@+id/enable_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textOff="Disabled"
-                android:textOn="Enabled"
+                android:textOff="@string/disabled"
+                android:textOn="@string/enabled"
                 android:textSize="25sp"/>
         </LinearLayout>
 
@@ -140,6 +145,9 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.8"/>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </LinearLayout>
