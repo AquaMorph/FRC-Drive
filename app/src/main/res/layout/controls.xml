@@ -1,10 +1,11 @@
-<RelativeLayout
+<LinearLayout
     android:id="@+id/controls"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -31,278 +32,114 @@
     </android.support.design.widget.AppBarLayout>
 
     <LinearLayout
-        android:id="@+id/robotState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@+id/appbar"
+        android:layout_weight="0.3">
 
-        <TextView
-            android:id="@+id/control_log"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:lines="1"
-            android:visibility="gone"/>
+        <include
+            android:id="@+id/leftButtons"
+            layout="@layout/button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".50"/>
 
-        <RadioGroup
-            android:id="@+id/run_mode"
+        <include
+            android:id="@+id/rightButtons"
+            layout="@layout/button"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".50"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+
+
+        <LinearLayout
+            android:id="@+id/joystick1Controls"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.aquamorph.frcdrive.Joystick
+                android:id="@+id/joystick1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".8"
+                android:clickable="true"/>
+
+            <com.aquamorph.frcdrive.Throttle
+                android:id="@+id/throttle1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/robotState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <RadioButton
-                android:id="@+id/run_teleop"
+            <TextView
+                android:id="@+id/control_log"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/teleoperated"
-                android:textSize="20sp"/>
+                android:lines="1"
+                android:visibility="gone"/>
 
-            <RadioButton
-                android:id="@+id/run_autonomous"
+            <RadioGroup
+                android:id="@+id/run_mode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/autonomous"
-                android:textSize="20sp"/>
-        </RadioGroup>
+                android:orientation="vertical">
 
-        <ToggleButton
-            android:id="@+id/enable_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textOff="Disabled"
-            android:textOn="Enabled"
-            android:textSize="25sp"/>
+                <RadioButton
+                    android:id="@+id/run_teleop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/teleoperated"
+                    android:textSize="20sp"/>
+
+                <RadioButton
+                    android:id="@+id/run_autonomous"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/autonomous"
+                    android:textSize="20sp"/>
+            </RadioGroup>
+
+            <ToggleButton
+                android:id="@+id/enable_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textOff="Disabled"
+                android:textOn="Enabled"
+                android:textSize="25sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/joystick2Controls"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.aquamorph.frcdrive.Throttle
+                android:id="@+id/throttle2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"/>
+
+            <com.aquamorph.frcdrive.Joystick
+                android:id="@+id/joystick2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.8"/>
+        </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/joystick1Controls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true">
-
-        <android.support.v7.widget.GridLayout
-            android:id="@+id/Joy1Buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:columnCount="6"
-            app:rowCount="2">
-
-            <Button
-                android:id="@+id/Joy1Button1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/one"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/two"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/three"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/four"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/five"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/six"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/seven"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/eight"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/nine"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button10"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/ten"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button11"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/eleven"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy1Button12"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/twelve"
-                app:layout_gravity="left"/>
-        </android.support.v7.widget.GridLayout>
-
-        <com.aquamorph.frcdrive.Joystick
-            android:id="@+id/joystick1"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/Joy1Buttons"
-            android:clickable="true"/>
-
-        <com.aquamorph.frcdrive.Throttle
-            android:id="@+id/throttle1"
-            android:layout_width="60dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/Joy1Buttons"
-            android:layout_toRightOf="@+id/joystick1"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/joystick2Controls"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true">
-
-        <android.support.v7.widget.GridLayout
-            android:id="@+id/Joy2Buttons"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:columnCount="6"
-            app:rowCount="2">
-
-            <Button
-                android:id="@+id/Joy2Button1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/one"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/two"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/three"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button4"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/four"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button5"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/five"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button6"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/six"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button7"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/seven"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button8"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/eight"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button9"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/nine"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button10"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/ten"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button11"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/eleven"
-                app:layout_gravity="left"/>
-
-            <Button
-                android:id="@+id/Joy2Button12"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="@string/twelve"
-                app:layout_gravity="left"/>
-        </android.support.v7.widget.GridLayout>
-
-        <com.aquamorph.frcdrive.Joystick
-            android:id="@+id/joystick2"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignRight="@+id/Joy2Buttons"
-            android:layout_below="@+id/Joy2Buttons"/>
-
-        <com.aquamorph.frcdrive.Throttle
-            android:id="@+id/throttle2"
-            android:layout_width="60dp"
-            android:layout_height="150dp"
-            android:layout_below="@+id/Joy2Buttons"
-            android:layout_toLeftOf="@+id/joystick2"/>
-    </RelativeLayout>
-
-</RelativeLayout>
+</LinearLayout>

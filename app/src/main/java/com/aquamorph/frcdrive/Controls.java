@@ -5,17 +5,14 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
-import com.aquamorph.frcdrive.Joystick;
 import com.aquamorph.frcdrive.Joystick.OnChangeListener;
-import com.aquamorph.frcdrive.Throttle;
 import com.aquamorph.frcdrive.Throttle.OnChangeListenerThrottle;
 
 public class Controls {
@@ -36,9 +33,8 @@ public class Controls {
 	private Throttle throttle2;
 	private ToggleButton enableBttn;
 	private RadioButton enableAuto;
-	private ViewGroup Joy1Buttons;
-	private ViewGroup Joy2Buttons;
-
+	private Button[] Joy1Buttons = new Button[12];
+	private Button[] Joy2Buttons = new Button[12];
 
 	@SuppressLint("ClickableViewAccessibility")
 	public Controls(Activity activity) {
@@ -65,11 +61,22 @@ public class Controls {
 		// mode and puts in tele.
 
 		// Joystick one buttons
-		Joy1Buttons = (ViewGroup) activity.findViewById(R.id.Joy1Buttons);
-		for (int i = 0; i < Joy1Buttons.getChildCount(); i++) {
-			final int x = i;
+		Joy1Buttons[0] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button1);
+		Joy1Buttons[1] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button2);
+		Joy1Buttons[2] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button3);
+		Joy1Buttons[3] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button4);
+		Joy1Buttons[4] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button5);
+		Joy1Buttons[5] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button6);
+		Joy1Buttons[6] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button7);
+		Joy1Buttons[7] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button8);
+		Joy1Buttons[8] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button9);
+		Joy1Buttons[9] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button10);
+		Joy1Buttons[10] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button11);
+		Joy1Buttons[11] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button12);
+		for (int i = 0; i < Joy1Buttons.length; i++) {
+			final int x = i + 1;
 			// Add listeners to the buttons.
-			final Button bttn = (Button) Joy1Buttons.getChildAt(i);
+			final Button bttn = Joy1Buttons[i];
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
@@ -91,16 +98,27 @@ public class Controls {
 		}
 
 		// Joystick two buttons
-		Joy2Buttons = (ViewGroup) activity.findViewById(R.id.Joy2Buttons);
-		for (int i = 0; i < Joy2Buttons.getChildCount(); i++) {
+		Joy2Buttons[0] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button1);
+		Joy2Buttons[1] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button2);
+		Joy2Buttons[2] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button3);
+		Joy2Buttons[3] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button4);
+		Joy2Buttons[4] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button5);
+		Joy2Buttons[5] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button6);
+		Joy2Buttons[6] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button7);
+		Joy2Buttons[7] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button8);
+		Joy2Buttons[8] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button9);
+		Joy2Buttons[9] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button10);
+		Joy2Buttons[10] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button11);
+		Joy2Buttons[11] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button12);
+		for (int i = 0; i < Joy2Buttons.length; i++) {
 			final int x = i;
 			// Add listeners to the buttons.
-			final Button bttn = (Button) Joy2Buttons.getChildAt(i);
+			final Button bttn = Joy2Buttons[i];
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
 				public boolean onTouch(View view, MotionEvent event) {
-					Log.d("Buttons", "Button hit: " + x);
+					Log.d("Buttons", "Button hit: " + x + 1);
 					switch (event.getAction()) {
 						case MotionEvent.ACTION_DOWN:
 							Joy2Bttns[x] = true;
