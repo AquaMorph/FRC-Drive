@@ -58,7 +58,7 @@
 
     </android.support.v7.widget.GridLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.7"
@@ -66,9 +66,12 @@
 
         <LinearLayout
             android:id="@+id/joystick1Controls"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/robotState"
+            android:layout_toStartOf="@+id/robotState">
 
             <com.aquamorph.frcdrive.Joystick
                 android:id="@+id/joystick1"
@@ -88,6 +91,7 @@
             android:id="@+id/robotState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:orientation="vertical">
 
             <TextView
@@ -130,9 +134,13 @@
 
         <LinearLayout
             android:id="@+id/joystick2Controls"
-            android:layout_width="0dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/robotState"
+            android:layout_toRightOf="@+id/robotState">
 
             <com.aquamorph.frcdrive.Throttle
                 android:id="@+id/throttle2"
@@ -148,6 +156,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>
