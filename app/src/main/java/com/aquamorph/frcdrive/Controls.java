@@ -16,6 +16,7 @@ import com.aquamorph.frcdrive.Joystick.OnChangeListener;
 import com.aquamorph.frcdrive.Throttle.OnChangeListenerThrottle;
 
 public class Controls {
+	private String TAG = "Controls";
 	public boolean enabled = false;
 	public boolean auto = false;
 	public byte joy1X = 0;
@@ -74,7 +75,7 @@ public class Controls {
 		Joy1Buttons[10] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button11);
 		Joy1Buttons[11] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button12);
 		for (int i = 0; i < Joy1Buttons.length; i++) {
-			final int x = i + 1;
+			final int x = i;
 			// Add listeners to the buttons.
 			final Button bttn = Joy1Buttons[i];
 
@@ -83,7 +84,7 @@ public class Controls {
 				@SuppressLint("ClickableViewAccessibility")
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
-					Log.d("Buttons", "Button hit: " + x);
+					Log.d(TAG, "Joystick 1 button " + (x + 1) + " hit");
 					switch (event.getAction()) {
 						case MotionEvent.ACTION_DOWN:
 							Joy1Bttns[x] = true;
@@ -118,7 +119,7 @@ public class Controls {
 			bttn.setOnTouchListener(new OnTouchListener() {
 
 				public boolean onTouch(View view, MotionEvent event) {
-					Log.d("Buttons", "Button hit: " + x + 1);
+					Log.d(TAG, "Joystick 2 button " + (x + 1) + " hit");
 					switch (event.getAction()) {
 						case MotionEvent.ACTION_DOWN:
 							Joy2Bttns[x] = true;
