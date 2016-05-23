@@ -73,17 +73,18 @@
             android:layout_toLeftOf="@+id/robotState"
             android:layout_toStartOf="@+id/robotState">
 
-            <com.aquamorph.frcdrive.Joystick
+            <com.aquamorph.frcdrive.ui.Joystick
                 android:id="@+id/joystick1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight=".8"
                 android:clickable="true"/>
 
-            <com.aquamorph.frcdrive.Throttle
+            <com.aquamorph.frcdrive.ui.Throttle
                 android:id="@+id/throttle1"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_weight="0.2"/>
         </LinearLayout>
 
@@ -142,13 +143,14 @@
             android:layout_toEndOf="@+id/robotState"
             android:layout_toRightOf="@+id/robotState">
 
-            <com.aquamorph.frcdrive.Throttle
+            <com.aquamorph.frcdrive.ui.Throttle
                 android:id="@+id/throttle2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 android:layout_weight="0.2"/>
 
-            <com.aquamorph.frcdrive.Joystick
+            <com.aquamorph.frcdrive.ui.Joystick
                 android:id="@+id/joystick2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

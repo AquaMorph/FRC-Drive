@@ -2,13 +2,12 @@ package com.aquamorph.frcdrive;
 
 import java.util.zip.CRC32;
 
-public class Packets {
-    public byte[] data = new byte[1024]; // Packet array
-
+class Packets {
     // Constants:
     static int JOY1 = 8, JOY2 = 16, JOY3 = 24, JOY4 = 32;
+    byte[] data = new byte[1024]; // Packet array
 
-    public Packets() {
+    Packets() {
         data[2] |= 64; // E Stop set to off
 
         // Diverstation version
@@ -32,16 +31,8 @@ public class Packets {
         return (byte) ((i & 0xFF00) >> 8);
     }
 
-    // private byte int2(int i) {
-    // return (byte) ((i & 0xFF0000) >> 16);
-    // }
-    //
-    // private int int1(int i) {
-    // return (byte) ((i & 0xFF000000) >> 24);
-    // }
-
     // Set the packet index to the provided value
-    public void setIndex(int index) {
+    void setIndex(int index) {
         data[0] = int3(index);
         data[1] = int4(index);
     }
@@ -54,7 +45,7 @@ public class Packets {
             data[2] &= ~16;
     }
 
-    public void setEnabled(boolean state) {
+    void setEnabled(boolean state) {
         if (state)
             data[2] |= 32;
         else
@@ -62,7 +53,7 @@ public class Packets {
     }
 
     // Set digital inputs, port is the digital io port number with base 0.
-    public void setDigitalIn(int port, boolean set) {
+    void setDigitalIn(int port, boolean set) {
         if (set)
             data[3] |= (byte) (128 / Math.pow(2, port));
         else
@@ -71,7 +62,7 @@ public class Packets {
 
     // Set the team number Convert to string and concatenate, then convert back
     // to int as a whole number.
-    public void setTeam(byte byte1, byte byte2) {
+    void setTeam(byte byte1, byte byte2) {
         int num = Integer.parseInt(Byte.toString(byte1) + Byte.toString(byte2));
         byte byt1 = (byte) ((num & 0xff00) >> 8); // Get first byte.
         byte byt2 = (byte) (num & 0xff); // Second byte.
@@ -81,17 +72,17 @@ public class Packets {
     }
 
     // Set alliance, either red 'R' or blue 'B'
-    public void setAlliance(char redOrBlue) {
+    void setAlliance(char redOrBlue) {
         data[6] = (byte) redOrBlue;
     }
 
     // Set team position.
-    public void setPosition(int pos) {
+    void setPosition(int pos) {
         data[7] = (byte) pos;
     }
 
     // Set the joystick
-    public void setJoystick(byte x, byte y, byte z, byte i, byte j, byte k, int joystick) {
+    void setJoystick(byte x, byte y, byte z, byte i, byte j, byte k, int joystick) {
         data[joystick] = x;
         data[joystick + 1] = (byte) -y;
         data[joystick + 2] = z;
@@ -101,7 +92,7 @@ public class Packets {
     }
 
     // Set the buttons
-    public void setButton(int button, boolean set, int joystick) {
+    void setButton(int button, boolean set, int joystick) {
         if (set) {
             if (joystick == 1) {
                 if (button < 8)
@@ -141,7 +132,7 @@ public class Packets {
         }
     }
 
-    public void makeCRC() {
+    void makeCRC() {
         CRC32 crc = new CRC32();
         crc.update(data);
         long checksum = crc.getValue();
@@ -151,7 +142,7 @@ public class Packets {
         data[1023] = (byte) (checksum & 0xff);
     }
 
-    public void clearCRC() {
+    void clearCRC() {
         data[1020] = 0;
         data[1021] = 0;
         data[1022] = 0;

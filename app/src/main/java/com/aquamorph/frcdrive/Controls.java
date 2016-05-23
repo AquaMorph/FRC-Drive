@@ -12,22 +12,23 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
 import android.widget.ToggleButton;
 
-import com.aquamorph.frcdrive.Joystick.OnChangeListener;
-import com.aquamorph.frcdrive.Throttle.OnChangeListenerThrottle;
+import com.aquamorph.frcdrive.ui.Joystick;
+import com.aquamorph.frcdrive.ui.Joystick.OnChangeListener;
+import com.aquamorph.frcdrive.ui.Throttle;
+import com.aquamorph.frcdrive.ui.Throttle.OnChangeListenerThrottle;
 
-public class Controls {
-	private String TAG = "Controls";
-	public boolean enabled = false;
+class Controls {
 	public boolean auto = false;
-	public byte joy1X = 0;
-	public byte joy1Y = 0;
-	public byte joy2X = 0;
-	public byte joy2Y = 0;
-	public byte throttleAxis1 = 0;
-	public byte throttleAxis2 = 0;
-	public boolean[] Joy1Bttns = new boolean[12];
-	public boolean[] Joy2Bttns = new boolean[12];
-
+	boolean enabled = false;
+	byte joy1X = 0;
+	byte joy1Y = 0;
+	byte joy2X = 0;
+	byte joy2Y = 0;
+	byte throttleAxis1 = 0;
+	byte throttleAxis2 = 0;
+	boolean[] Joy1Bttns = new boolean[12];
+	boolean[] Joy2Bttns = new boolean[12];
+	private String TAG = "Controls";
 	private Joystick joystick1;
 	private Joystick joystick2;
 	private Throttle throttle1;
@@ -38,7 +39,7 @@ public class Controls {
 	private Button[] Joy2Buttons = new Button[12];
 
 	@SuppressLint("ClickableViewAccessibility")
-	public Controls(Activity activity) {
+	Controls(Activity activity) {
 
 		// Initialize UI components.
 		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
@@ -49,11 +50,65 @@ public class Controls {
 		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
 
 		// Set event listeners
+		OnChangeListener joyListener1 = new OnChangeListener() {
+
+			@Override
+			public boolean onChange(byte xAxis, byte yAxis) {
+				joy1X = xAxis;
+				joy1Y = yAxis;
+				return false;
+			}
+		};
 		joystick1.setOnChangeListener(joyListener1);
+		OnChangeListener joyListener2 = new OnChangeListener() {
+
+			@Override
+			public boolean onChange(byte xAxis, byte yAxis) {
+				joy2X = xAxis;
+				joy2Y = yAxis;
+				return false;
+			}
+		};
 		joystick2.setOnChangeListener(joyListener2);
+		OnChangeListenerThrottle throttleListener1 = new OnChangeListenerThrottle() {
+
+			@Override
+			public boolean onChange(byte axis) {
+				throttleAxis1 = axis;
+				return false;
+			}
+
+		};
 		throttle1.setOnChangeListener(throttleListener1);
+		OnChangeListenerThrottle throttleListener2 = new OnChangeListenerThrottle() {
+
+			@Override
+			public boolean onChange(byte axis) {
+				throttleAxis2 = axis;
+				return false;
+			}
+
+		};
 		throttle2.setOnChangeListener(throttleListener2);
+		OnCheckedChangeListener enableListener = new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton button, boolean value) {
+				enabled = value;
+			}
+		};
 		enableBttn.setOnCheckedChangeListener(enableListener);
+		OnCheckedChangeListener autoListener = new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(CompoundButton button, boolean value) {
+				// Disable robot when changing modes.
+				enabled = false;
+				enableBttn.setChecked(false);
+				auto = value;
+			}
+
+		};
 		enableAuto.setOnCheckedChangeListener(autoListener);
 
 		enableBttn.setChecked(enabled);
@@ -133,78 +188,5 @@ public class Controls {
 			});
 		}
 	}
-
-	// Joystick 1
-	OnChangeListener joyListener1 = new OnChangeListener() {
-
-		@Override
-		public boolean onChange(byte xAxis, byte yAxis) {
-			joy1X = xAxis;
-			joy1Y = yAxis;
-			return false;
-		}
-	};
-
-	// Joystick 2
-	OnChangeListener joyListener2 = new OnChangeListener() {
-
-		@Override
-		public boolean onChange(byte xAxis, byte yAxis) {
-			joy2X = xAxis;
-			joy2Y = yAxis;
-			return false;
-		}
-	};
-
-	//Throttle 1
-	OnChangeListenerThrottle throttleListener1 = new OnChangeListenerThrottle() {
-
-		@Override
-		public boolean onChange(byte axis) {
-			throttleAxis1 = axis;
-			return false;
-		}
-
-	};
-
-	//Throttle 2
-	OnChangeListenerThrottle throttleListener2 = new OnChangeListenerThrottle() {
-
-		@Override
-		public boolean onChange(byte axis) {
-			throttleAxis2 = axis;
-			return false;
-		}
-
-	};
-
-	// Enable button
-	OnCheckedChangeListener enableListener = new OnCheckedChangeListener() {
-
-		@Override
-		public void onCheckedChanged(CompoundButton button, boolean value) {
-			if (value) {
-				enabled = true;
-			} else {
-				enabled = false;
-			}
-		}
-	};
-
-	// Autonimous radio
-	OnCheckedChangeListener autoListener = new OnCheckedChangeListener() {
-
-		@Override
-		public void onCheckedChanged(CompoundButton button, boolean value) {
-			// Disable robot when changing modes.
-			enabled = false;
-			enableBttn.setChecked(false);
-			if (value)
-				auto = true;
-			else
-				auto = false;
-		}
-
-	};
 
 }

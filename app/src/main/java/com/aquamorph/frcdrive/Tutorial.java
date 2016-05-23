@@ -14,7 +14,7 @@ public class Tutorial extends AppCompatActivity {
 
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
-		if(getSupportActionBar() != null) {
+		if (getSupportActionBar() != null) {
 			getSupportActionBar().setTitle(R.string.tutorial);
 			getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 		}

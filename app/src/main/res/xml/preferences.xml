@@ -15,21 +15,21 @@
             android:entryValues="@array/joystickportsvalue"
             android:key="leftjoy"
             android:summary="Set the USB port"
-            android:title="@string/leftjoy"/>
+            android:title="@string/left_joystick"/>
         <ListPreference
             android:defaultValue="2"
             android:entries="@array/joystickports"
             android:entryValues="@array/joystickportsvalue"
             android:key="rightjoy"
             android:summary="Set the USB port"
-            android:title="@string/rightjoy"/>
+            android:title="@string/right_joystick"/>
         <ListPreference
             android:defaultValue="3"
             android:entries="@array/joystickports"
             android:entryValues="@array/joystickportsvalue"
             android:key="physicaljoy"
             android:summary="Set the USB port"
-            android:title="@string/physicaljoy"/>
+            android:title="@string/physical_joystick"/>
     </PreferenceCategory>
 
     <PreferenceCategory

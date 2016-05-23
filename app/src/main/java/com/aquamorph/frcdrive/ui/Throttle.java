@@ -1,4 +1,4 @@
-package com.aquamorph.frcdrive;
+package com.aquamorph.frcdrive.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,10 +12,6 @@ import android.view.View.OnTouchListener;
 
 public class Throttle extends View implements OnTouchListener {
 
-    interface OnChangeListenerThrottle {
-        public boolean onChange(byte axis);
-    }
-
     private byte axis = 0;
     private double virtualAxis = 128.0;
     private float actualAxis;
@@ -24,7 +20,6 @@ public class Throttle extends View implements OnTouchListener {
     private float width;
     private float height;
     private OnChangeListenerThrottle onChange;
-
     @SuppressLint("ClickableViewAccessibility")
     public Throttle(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -73,6 +68,10 @@ public class Throttle extends View implements OnTouchListener {
 
     public byte getaxis() {
         return axis;
+    }
+
+    public interface OnChangeListenerThrottle {
+        boolean onChange(byte axis);
     }
 
 }

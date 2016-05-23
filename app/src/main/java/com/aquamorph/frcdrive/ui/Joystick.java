@@ -1,4 +1,4 @@
-package com.aquamorph.frcdrive;
+package com.aquamorph.frcdrive.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -12,10 +12,6 @@ import android.view.View.OnTouchListener;
 
 public class Joystick extends View implements OnTouchListener{
 
-    interface OnChangeListener{
-        public boolean onChange(byte xAxis, byte yAxis);
-    }
-
     private byte xAxis = 0;
     private byte yAxis = 0;
     private float virtualX = 0;
@@ -26,7 +22,6 @@ public class Joystick extends View implements OnTouchListener{
     private Paint outer = new Paint();
     private int outerRadius;
     private int innerRadius;
-
     private OnChangeListener onChange;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -48,6 +43,7 @@ public class Joystick extends View implements OnTouchListener{
     public byte getXAxis(){
         return xAxis;
     }
+
     public byte getYAxis(){
         return yAxis;
     }
@@ -59,6 +55,7 @@ public class Joystick extends View implements OnTouchListener{
         actualX = outerRadius;
         actualY = outerRadius;
     }
+
     @SuppressLint("ClickableViewAccessibility")
     public void setOnChangeListener(OnChangeListener listener){
         onChange = listener;
@@ -118,6 +115,10 @@ public class Joystick extends View implements OnTouchListener{
         yAxis = (byte) (virtualY);
         onChange.onChange(xAxis, yAxis);
         return true;
+    }
+
+    public interface OnChangeListener {
+        boolean onChange(byte xAxis, byte yAxis);
     }
 
 }
