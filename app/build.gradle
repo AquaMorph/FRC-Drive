@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.aquamorph.frcdrive"
-        minSdkVersion 11
+        minSdkVersion 12
         targetSdkVersion 23
         versionCode 3
         versionName "1.2.0"

@@ -29,25 +29,46 @@ class Controls {
 	boolean[] Joy1Bttns = new boolean[12];
 	boolean[] Joy2Bttns = new boolean[12];
 	private String TAG = "Controls";
-	private Joystick joystick1;
-	private Joystick joystick2;
-	private Throttle throttle1;
-	private Throttle throttle2;
 	private ToggleButton enableBttn;
-	private RadioButton enableAuto;
-	private Button[] Joy1Buttons = new Button[12];
-	private Button[] Joy2Buttons = new Button[12];
 
 	@SuppressLint("ClickableViewAccessibility")
 	Controls(Activity activity) {
 
 		// Initialize UI components.
-		joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
-		joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
-		throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
-		throttle2 = (Throttle) activity.findViewById(R.id.throttle2);
+		Joystick joystick1 = (Joystick) activity.findViewById(R.id.joystick1);
+		Joystick joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
+		Throttle throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
+		Throttle throttle2 = (Throttle) activity.findViewById(R.id.throttle2);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
-		enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
+		RadioButton enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
+		// Joystick one buttons
+		Button[] joystick1Buttons = new Button[12];
+		joystick1Buttons[0] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button1);
+		joystick1Buttons[1] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button2);
+		joystick1Buttons[2] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button3);
+		joystick1Buttons[3] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button4);
+		joystick1Buttons[4] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button5);
+		joystick1Buttons[5] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button6);
+		joystick1Buttons[6] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button7);
+		joystick1Buttons[7] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button8);
+		joystick1Buttons[8] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button9);
+		joystick1Buttons[9] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button10);
+		joystick1Buttons[10] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button11);
+		joystick1Buttons[11] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button12);
+		// Joystick two buttons
+		Button[] joystick2Buttons = new Button[12];
+		joystick2Buttons[0] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button1);
+		joystick2Buttons[1] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button2);
+		joystick2Buttons[2] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button3);
+		joystick2Buttons[3] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button4);
+		joystick2Buttons[4] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button5);
+		joystick2Buttons[5] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button6);
+		joystick2Buttons[6] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button7);
+		joystick2Buttons[7] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button8);
+		joystick2Buttons[8] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button9);
+		joystick2Buttons[9] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button10);
+		joystick2Buttons[10] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button11);
+		joystick2Buttons[11] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button12);
 
 		// Set event listeners
 		OnChangeListener joyListener1 = new OnChangeListener() {
@@ -116,23 +137,10 @@ class Controls {
 		// Don't need tele listener because auto listener takes off auto
 		// mode and puts in tele.
 
-		// Joystick one buttons
-		Joy1Buttons[0] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button1);
-		Joy1Buttons[1] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button2);
-		Joy1Buttons[2] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button3);
-		Joy1Buttons[3] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button4);
-		Joy1Buttons[4] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button5);
-		Joy1Buttons[5] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button6);
-		Joy1Buttons[6] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button7);
-		Joy1Buttons[7] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button8);
-		Joy1Buttons[8] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button9);
-		Joy1Buttons[9] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button10);
-		Joy1Buttons[10] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button11);
-		Joy1Buttons[11] = (Button) activity.findViewById(R.id.leftButtons).findViewById(R.id.button12);
-		for (int i = 0; i < Joy1Buttons.length; i++) {
+		for (int i = 0; i < joystick1Buttons.length; i++) {
 			final int x = i;
 			// Add listeners to the buttons.
-			final Button bttn = Joy1Buttons[i];
+			final Button bttn = joystick1Buttons[i];
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
@@ -153,23 +161,10 @@ class Controls {
 			});
 		}
 
-		// Joystick two buttons
-		Joy2Buttons[0] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button1);
-		Joy2Buttons[1] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button2);
-		Joy2Buttons[2] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button3);
-		Joy2Buttons[3] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button4);
-		Joy2Buttons[4] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button5);
-		Joy2Buttons[5] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button6);
-		Joy2Buttons[6] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button7);
-		Joy2Buttons[7] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button8);
-		Joy2Buttons[8] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button9);
-		Joy2Buttons[9] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button10);
-		Joy2Buttons[10] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button11);
-		Joy2Buttons[11] = (Button) activity.findViewById(R.id.rightButtons).findViewById(R.id.button12);
-		for (int i = 0; i < Joy2Buttons.length; i++) {
+		for (int i = 0; i < joystick2Buttons.length; i++) {
 			final int x = i;
 			// Add listeners to the buttons.
-			final Button bttn = Joy2Buttons[i];
+			final Button bttn = joystick2Buttons[i];
 
 			bttn.setOnTouchListener(new OnTouchListener() {
 
@@ -188,5 +183,4 @@ class Controls {
 			});
 		}
 	}
-
 }
