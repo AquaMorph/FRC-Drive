@@ -15,12 +15,10 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-public class PacketSender extends Thread {
+class PacketSender extends Thread {
 
-	String TAG = "PacketSender";
+	private String TAG = "PacketSender";
 	private int packetIndex;
-	private byte teamNum1;
-	private byte teamNum2;
 	private DatagramSocket sock;
 	private Packets rioPacket = new Packets();
 	private DatagramPacket packet;
@@ -38,16 +36,15 @@ public class PacketSender extends Thread {
 	private byte[] joystick2Axis = new byte[6];
 	private byte[] joystick3Axis = new byte[6];
 	private byte[] joystick4Axis = new byte[6];
-	private String protocol;
 
-	public PacketSender(Activity activity, Controls uiMngr, PhysicalJoystick physicalJoystick) {
+	PacketSender(Activity activity, Controls uiMngr, PhysicalJoystick physicalJoystick) {
 		SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(activity);
 		leftjoy = Integer.parseInt(settings.getString("leftjoy", "1"));
 		rightjoy = Integer.parseInt(settings.getString("rightjoy", "2"));
 		physicaljoy = Integer.parseInt(settings.getString("physicaljoy", "3"));
 		leftthrottle = Integer.parseInt(settings.getString("leftthrottle", "3")) - 1;
 		rightthrottle = Integer.parseInt(settings.getString("rightthrottle", "3")) - 1;
-		protocol = settings.getString("protocol", "2015");
+		String protocol = settings.getString("protocol", "2015");
 		this.activity = activity;
 		ui = uiMngr;
 		phyJoy = physicalJoystick;
@@ -58,8 +55,8 @@ public class PacketSender extends Thread {
 		//Find the team number from current ip address.
 		WifiManager wifi = (WifiManager) activity.getSystemService(Context.WIFI_SERVICE);
 		int address = wifi.getConnectionInfo().getIpAddress();
-		teamNum1 = (byte) ((address & 0xff00) >> 8);
-		teamNum2 = (byte) ((address & 0xff0000) >> 16);
+		byte teamNum1 = (byte) ((address & 0xff00) >> 8);
+		byte teamNum2 = (byte) ((address & 0xff0000) >> 16);
 
 		//Set up the datagram packet.
 		InetAddress crioAddr;
@@ -71,12 +68,7 @@ public class PacketSender extends Thread {
 			}
 			Log.i(TAG, "Robot IP " + crioAddr.getHostAddress());        //Tell the user the robot's IP
 			packet = new DatagramPacket(rioPacket.data, 1024, crioAddr, 1110);
-			if ((address & 0xff) != 10 && (address & 0xff000000) >> 24 != 6)    //Let the application know if it is
-			{                                                                //not connected to a robot network.
-				isRobotNet = false;
-			} else {
-				isRobotNet = true;
-			}
+			isRobotNet = !((address & 0xff) != 10 && (address & 0xff000000) >> 24 != 6);
 		} catch (UnknownHostException e) {
 			postMessage("Packet Error: " + e.getMessage());
 			e.printStackTrace();
@@ -96,7 +88,7 @@ public class PacketSender extends Thread {
 		}
 	}
 
-	public byte[] arrayReset(byte[] array) {
+	private byte[] arrayReset(byte[] array) {
 		for (int i = 0; array.length > i; i++) {
 			array[i] = (byte) 0;
 		}

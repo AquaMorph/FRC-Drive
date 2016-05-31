@@ -27,6 +27,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
+            <ToggleButton
+                android:id="@+id/enable_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textOff="@string/disabled"
+                android:textOn="@string/enabled"/>
+
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
@@ -124,13 +131,6 @@
                     android:textSize="20sp"/>
             </RadioGroup>
 
-            <ToggleButton
-                android:id="@+id/enable_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textOff="@string/disabled"
-                android:textOn="@string/enabled"
-                android:textSize="25sp"/>
         </LinearLayout>
 
         <LinearLayout

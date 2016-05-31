@@ -32,8 +32,14 @@
     <string name="left_joystick">Left Onscreen Controller</string>
     <string name="right_joystick">Right Onscreen Controller</string>
     <string name="physical_joystick">Physical Controller</string>
-    <string name="leftthrottle">Left Onscreen Throttle</string>
-    <string name="rightthrottle">Right Onscreen Throttle</string>
+    <string name="left_throttle">Left Onscreen Throttle</string>
+    <string name="right_throttle">Right Onscreen Throttle</string>
     <string name="protocol">Protocol Version</string>
+    <string-array name="robot_states">
+        <item>Teleop</item>
+        <item>Autonomous</item>
+        <item>Test</item>
+        <item>Practice</item>
+    </string-array>
 
 </resources>

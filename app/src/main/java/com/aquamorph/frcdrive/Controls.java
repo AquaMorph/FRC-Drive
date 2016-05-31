@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
+import android.widget.Spinner;
 import android.widget.ToggleButton;
 
 import com.aquamorph.frcdrive.ui.Joystick;
@@ -39,6 +41,11 @@ class Controls {
 		Joystick joystick2 = (Joystick) activity.findViewById(R.id.joystick2);
 		Throttle throttle1 = (Throttle) activity.findViewById(R.id.throttle1);
 		Throttle throttle2 = (Throttle) activity.findViewById(R.id.throttle2);
+		Spinner spinner = (Spinner) activity.findViewById(R.id.spinner);
+		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity,
+				R.array.robot_states, android.R.layout.simple_spinner_item);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		spinner.setAdapter(adapter);
 		enableBttn = (ToggleButton) activity.findViewById(R.id.enable_button);
 		RadioButton enableAuto = (RadioButton) activity.findViewById(R.id.run_autonomous);
 		// Joystick one buttons

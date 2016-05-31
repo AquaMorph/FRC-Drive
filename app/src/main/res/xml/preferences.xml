@@ -41,14 +41,14 @@
             android:entryValues="@array/throttleaxisvalue"
             android:key="leftthrottle"
             android:summary="Set the axis"
-            android:title="@string/leftthrottle"/>
+            android:title="@string/left_throttle"/>
         <ListPreference
             android:defaultValue="3"
             android:entries="@array/throttleaxis"
             android:entryValues="@array/throttleaxisvalue"
             android:key="rightthrottle"
             android:summary="Set the axis"
-            android:title="@string/rightthrottle"/>
+            android:title="@string/right_throttle"/>
     </PreferenceCategory>
 
     <PreferenceCategory
